@@ -33,7 +33,7 @@ This contract gives access to following functions -
 - `_processMessageFromRoot(bytes memory message)` - This is a virtual function that needs to implement the logic to handle message sent from **_RootTunnel_**.
 
 ## Implementation
-As an example we will implement contracts where we want to calculate sum till a provied number. The sum can be calculated on Ethereum chain by calling `calculateSum` function. This will be too expensive due to high gas fees.
+As an example we will implement contracts where we want to calculate sum till a provided number. The sum can be calculated on Ethereum chain by calling `calculateSum` function. This will be too expensive due to high gas fees.
 
 Alternatively we can call `calculateSumOnChildChain`. This will internally send the number to ChildTunnel by calling `_sendMessageToChild`. Then on Matic chain `_processMessageFromRoot` will receive this number and do required calculation. After calculation is done call `_sendMessageToRoot` to emit this calculated result. Now finally call `receiveMessage` on RootTunnel giving proof of emitted result. This will internally call `_processMessageFromChild` to store it in variable.
 
